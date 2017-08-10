@@ -4,22 +4,23 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta content="en-us" http-equiv="Content-Language" />
-    <meta content="A Boggle Solver written by Shane da Silva" name="description" />
-
-    </script>
-    <title>Boggle Solver &mdash; by Shane da Silva</title>
+    <meta content="A Boggle Solver written by Zsolt KOVÁCS" name="description" />
+    <title>Boggle Solver &mdash; by Zsolt KOVÁCS</title>
 </head>
 
 <body>
-    <div id="boggle-panel">
+
+    <!-- <video autoplay="true" id="videoElement"></video>
+    <button id="snap">snap</button> -->
+
+    <div id="settings-panel">
         <div id="controls">
-            <input type="file" id="boggleimage" accept="image/*;capture=camera">
-            <input type="text" id="boggletext" value="boggleisafungame" />
-            <br/>
+
             <label>Size</label>
             <input type="number" id="num-rows" min="2" max="8" value="2" /> &#x2716;
             <input type="number" id="num-cols" min="2" max="8" value="2" />
             <br/>
+            <input type="text" id="boggletext" />
             <button id="solve-button">Solve</button>
         </div>
     </div>
@@ -37,6 +38,10 @@
         <p id="solving-message">Solving puzzle...</p>
         <ul id="word-list"></ul>
     </div>
+
+    <ul id="debug">
+
+    </ul>
 </body>
 
 </html>

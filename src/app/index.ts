@@ -1,6 +1,7 @@
 import { Trie } from "./trie";
 import { Board } from "./board";
 import { Boggle } from "./boggle";
+import { Camera } from "./camera";
 import * as Tesseract from "tesseract.js";
 
 import 'jquery/dist/jquery';
@@ -17,50 +18,26 @@ var wordList = $('#word-list');
 var board: Board;
 var dict = new Trie();
 var boggle = new Boggle();
+var camera = new Camera();
 
-numRows.val(4);
-numCols.val(4);
-boggleText.val("boggleisafungame");
+//camera.init(<HTMLVideoElement>document.querySelector("#videoElement"));
+// $("#snap").click(() => {
+//     camera.capture((txt) => {
+//         boggleText.val(txt);
+//     })
+// });
 
+// EVENTS
 $('#num-rows, #num-cols').click(boardSizeChanged).change(boardSizeChanged);
-
-$("#boggleimage").change(() => {
-    var image = $("#boggleimage");
-
-    Tesseract.recognize((image[0] as HTMLInputElement).files[0])
-        .progress(message =>
-            console.log(message))
-        .catch(err => console.error(err))
-        .then((result) => {
-            var boggletext = '';
-
-            result.words.forEach(c => {
-                boggletext += c.text;
-            });
-
-            boggleText.val(boggletext);
-            boggleText.change();
-
-            loadTextToBoard(true);
-        })
-        .finally(resultOrError => console.log(resultOrError));
-});
-
-wordPanel.hide();
+$('#solve-button').click(solveBoggle);
 
 function boardSizeChanged(): void {
     boardDiv.empty();
     board = boggle.createBoard(numRows.val(), numCols.val(), boardDiv);
+    loadTextToBoard(false);
 };
 
-boggleText.change((ev: any) => {
-    loadTextToBoard(true);
-});
-
-
-$(document).ready(() => {
-    loadTextToBoard(false);
-});
+wordPanel.hide();
 
 //Load words
 $.get('data/words-hu.txt').then((data) => {
@@ -72,6 +49,13 @@ $.get('data/words-hu.txt').then((data) => {
     }
 
     $('#loading-message').hide();
+
+    //Init datas
+    numRows.val(4);
+    numCols.val(4);
+
+    boggleText.val("boggleisafungame");
+
     boardSizeChanged();
 
 }, () => {
@@ -83,7 +67,7 @@ function loadTextToBoard(solve: boolean): void {
         cols = numCols.val(),
         count = 0;
 
-    var str = $('#boggletext').val();
+    var str = boggleText.val();
     if (str && str.length == (rows * cols)) {
         for (var r = 0; r < rows; r++) {
             for (var c = 0; c < cols; c++) {
@@ -93,12 +77,15 @@ function loadTextToBoard(solve: boolean): void {
             }
         }
 
-        if (solve)
-            $('#solve-button').click();
+        if (solve) {
+            solveBoggle();
+        } else {
+            wordPanel.hide();
+        }
     }
 }
 
-$('#solve-button').click(() => {
+function solveBoggle(): void {
     wordList.empty();
     $("#solving-message").show();
     wordPanel.show();
@@ -122,11 +109,12 @@ $('#solve-button').click(() => {
     for (var i = 0; i < words.length; i++) {
         wordList.append('<li>' + words[i] + '</li>');
     }
-});
+}
+
 
 // Hitting Enter solves puzzle
 $(document).keyup(function (evt) {
     if (evt.keyCode == 13) {
-        $('#solve-button').click();
+        loadTextToBoard(true);
     }
 });
