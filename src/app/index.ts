@@ -7,14 +7,22 @@ import 'jquery/dist/jquery';
 import '../style/index.css';
 
 var boardPanel = $('#boggle-panel');
+var boggleText = $('#boggletext');
 var boardDiv = $('#board');
-var board: Board;
 var numRows = $('#num-rows');
 var numCols = $('#num-cols');
 var wordPanel = $('#words-panel');
 var wordList = $('#word-list');
+
+var board: Board;
 var dict = new Trie();
 var boggle = new Boggle();
+
+numRows.val(4);
+numCols.val(4);
+boggleText.val("boggleisafungame");
+
+$('#num-rows, #num-cols').click(boardSizeChanged).change(boardSizeChanged);
 
 $("#boggleimage").change(() => {
     var image = $("#boggleimage");
@@ -30,10 +38,10 @@ $("#boggleimage").change(() => {
                 boggletext += c.text;
             });
 
-            $('#boggletext').val(boggletext);
-            $('#boggletext').change();
+            boggleText.val(boggletext);
+            boggleText.change();
 
-            loadTextToBoard(boggletext, true);
+            loadTextToBoard(true);
         })
         .finally(resultOrError => console.log(resultOrError));
 });
@@ -45,34 +53,37 @@ function boardSizeChanged(): void {
     board = boggle.createBoard(numRows.val(), numCols.val(), boardDiv);
 };
 
-numRows.val(4);
-numCols.val(4);
+boggleText.change((ev: any) => {
+    loadTextToBoard(true);
+});
 
-$('#num-rows, #num-cols').click(boardSizeChanged).change(boardSizeChanged);
+
+$(document).ready(() => {
+    loadTextToBoard(false);
+});
 
 //Load words
-$.get('data/length-up-to-7.txt').then((data) => {
+$.get('data/words-hu.txt').then((data) => {
     var words: string[] = data.split('\n');
+
     for (var i = words.length - 1; i >= 0; i--) {
-        dict.insert(words[i]);
+        if (words[i].length > 2)
+            dict.insert(words[i]);
     }
 
     $('#loading-message').hide();
     boardSizeChanged();
 
-    var btext = $('#boggletext').val();
-
-    loadTextToBoard(btext, true);
-
 }, () => {
     $('#loading-message').text("There was a problem loading the dictionary");
 });
 
-function loadTextToBoard(str: string, solve: boolean): void {
+function loadTextToBoard(solve: boolean): void {
     var rows = numRows.val(),
         cols = numCols.val(),
         count = 0;
 
+    var str = $('#boggletext').val();
     if (str && str.length == (rows * cols)) {
         for (var r = 0; r < rows; r++) {
             for (var c = 0; c < cols; c++) {

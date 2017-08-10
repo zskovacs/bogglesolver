@@ -1,5 +1,5 @@
 export class Trie {
-    public ALPHABET_SIZE = 26;
+    public ALPHABET_SIZE = 400;
     public ASCII_OFFSET = 'A'.charCodeAt(0);
 
     public children: Array<Trie>;
