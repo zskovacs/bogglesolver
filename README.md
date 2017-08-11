@@ -1,6 +1,8 @@
 # Boggle Solver
 Typescript word finder for puzzles like boggle or wordament. 
+
 Original project: [SDS's boggle solver](https://github.com/sds/boggle-solver)
+
 Demo: [Click](https://zskovacs.github.io/bogglesolver)
 
 ## Installing
