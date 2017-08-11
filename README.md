@@ -30,7 +30,7 @@ $.get('data/words-hu.txt').then(...);
 ## BUGS
 ### Optical character recognition ### 
 Main idea was that you could have used your phone's camera to take a picture of the puzzle and it should have automatically fill the board.
-I use [tesseract.js](https://github.com/naptha/tesseract.js) with HTML5, but it is commented out, because it not working properly:
+I use [tesseract.js](https://github.com/naptha/tesseract.js) with HTML5 camera access, but it is commented out, because it not working properly:
 
 src\index.ts 
 ```javascript
