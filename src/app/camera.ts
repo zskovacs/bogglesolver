@@ -12,16 +12,22 @@ export class Camera {
             (navigator as any).msGetUserMedia ||
             (navigator as any).oGetUserMedia;
 
-        //// BACK CAMERA?
-        // navigator.mediaDevices.enumerateDevices().then((devices: any) => {
-        //     devices.forEach(function (device: any) {
-        //         alert(device.kind + ": " + device.label +
-        //             " id = " + device.deviceId);
-        //     });
-        // });
-
         if (navigator.getUserMedia) {
-            navigator.getUserMedia({ video: true }, handleVideo, videoError);
+            // BACK CAMERA?
+            navigator.mediaDevices.enumerateDevices().then((devices: any) => {
+                var init = false;
+
+                devices.forEach((device: any) => {
+                    if (device.kind.indexOf("video") !== -1 && device.label.indexOf("back") !== -1) {
+                        navigator.getUserMedia({ video: { deviceId: device.deviceId } }, handleVideo, videoError);
+                        var init = true;
+                    }
+                });
+
+                if (init === false)
+                    navigator.getUserMedia({ video: true }, handleVideo, videoError);
+            });
+            //navigator.getUserMedia({ video: true }, handleVideo, videoError);
         }
         var self = this;
         function handleVideo(stream: MediaStream) {
@@ -36,13 +42,13 @@ export class Camera {
     capture(callback: (result: string) => void): void {
         Tesseract.recognize(this.video)
             .progress(message => {
-                console.log(message.status);
+                this.debug(message.status);
             })
             .catch(err => {
-                console.log(err.message);
+                this.debug(err.message);
             })
             .then((result) => {
-                console.log("Result:" + result.text);
+                this.debug("Result:" + result.text);
                 var boggletext = '';
 
                 result.words.forEach(c => {
@@ -52,5 +58,8 @@ export class Camera {
                 callback(boggletext);
             })
             .finally(resultOrError => console.log(resultOrError));
+    }
+    debug(str: string): void {
+        $("ul#debug").append("<li>" + str + "</li>");
     }
 }
