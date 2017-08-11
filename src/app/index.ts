@@ -20,12 +20,12 @@ var dict = new Trie();
 var boggle = new Boggle();
 var camera = new Camera();
 
-//camera.init(<HTMLVideoElement>document.querySelector("#videoElement"));
-// $("#snap").click(() => {
-//     camera.capture((txt) => {
-//         boggleText.val(txt);
-//     })
-// });
+camera.init(<HTMLVideoElement>document.querySelector("#videoElement"));
+$("#videoElement").click(() => {
+    camera.capture((txt) => {
+        boggleText.val(txt);
+    })
+});
 
 // EVENTS
 $('#num-rows, #num-cols').click(boardSizeChanged).change(boardSizeChanged);

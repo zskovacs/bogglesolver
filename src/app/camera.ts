@@ -40,15 +40,18 @@ export class Camera {
     }
 
     capture(callback: (result: string) => void): void {
-        Tesseract.recognize(this.video)
-            .progress(message => {
-                this.debug(message.status);
+        var canvas = <HTMLCanvasElement>document.getElementById('#previewcanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(this.video, 0, 0, 250, 250);
+        
+        Tesseract.recognize(canvas)
+            .progress(result => {
+                $("#ocr_status").text(result["status"] + " (" + (result["progress"] * 100) + "%)");
             })
             .catch(err => {
                 this.debug(err.message);
             })
             .then((result) => {
-                this.debug("Result:" + result.text);
                 var boggletext = '';
 
                 result.words.forEach(c => {
