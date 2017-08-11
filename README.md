@@ -32,18 +32,18 @@ I use [tesseract.js](https://github.com/naptha/tesseract.js) with HTML5, but it 
 
 src\index.ts 
 ```javascript
-// camera.init(<HTMLVideoElement>document.querySelector("#videoElement"));
-// $("#videoElement").click(() => {
-//     camera.capture((txt) => {
-//         boggleText.val(txt);
-//     })
-// });
+camera.init(<HTMLVideoElement>document.querySelector("#videoElement"));
+$("#videoElement").click(() => {
+    camera.capture((txt) => {
+        boggleText.val(txt);
+    })
+});
 ```
 
 src\index.html
 ```html
-    <!-- <video autoplay="true" id="videoElement" width="250" height="250"></video>
-    <canvas id="#previewcanvas" width="250" height="250"></canvas>
-    <div id="ocr_status"> </div>
-    <div id="ocr_result"> </div> -->
+<video autoplay="true" id="videoElement" width="250" height="250"></video>
+<canvas id="#previewcanvas" width="250" height="250"></canvas>
+<div id="ocr_status"> </div>
+<div id="ocr_result"> </div>
 ```
