@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.videostream {
+      border: 1px solid #ccc;
+      width: 250px;
+      height: 250px;
+}
+
+#instructions {
+  font-family: Helvetica;
+  color: #333;
+  margin: 1em 1em 0;
+}
+
+#settings-panel {
+  font-size: 1em;
+  font-family: Helvetica;
+  color: #333;
+  display: inline-block;
+  padding: 1em;
+  margin: 15px auto;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #666;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#boggle-panel {
+  font-size: 1em;
+  font-family: Helvetica;
+  color: #333;
+  display: inline-block;
+  padding: 1em;
+  margin: 150px auto;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #666;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#controls {
+  margin: 0.5em 0;
+}
+
+#controls input[type="number"] {
+  border-radius: 5px;
+  font-family: Helvetica;
+  font-size: 1em;
+  width: 2em;
+}
+
+#solve-button {
+  font-family: Helvetica;
+  font-size: 1em;
+  color: #333;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 0.2em;
+}
+
+#words-panel {
+  display: block;
+  font-size: 1em;
+  font-family: Helvetica;
+  color: #333;
+  display: inline-block;
+  padding: 1em;
+  width: calc(100% - 150px);
+  margin: 25px;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #666;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#num-words {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#word-list {
+  text-align: left;
+  list-style-type: none;
+  padding: 0;
+}
+
+#word-list li {
+  float: left;
+  width: 9em;
+}
+.boggle-board .cell {
+  border: none;
+  background-color: #fff;
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  margin: 2px;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
