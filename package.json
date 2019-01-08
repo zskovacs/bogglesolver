@@ -1,10 +1,10 @@
 {
   "name": "boggle-solver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080 --host 10.219.149.245 --https",
+    "start": "webpack-dev-server --inline --progress --port 8080",
     "build": "webpack -d --color",
     "buildProd": "webpack -p --color"
   },
@@ -12,22 +12,23 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^2.0.45",
+    "@types/jquery": "^3.3.29",
     "@types/tesseract.js": "0.0.2",
-    "awesome-typescript-loader": "^3.2.2",
-    "clean-webpack-plugin": "^0.1.16",
-    "copy-webpack-plugin": "^4.0.1",
-    "html-loader": "^0.5.0",
-    "html-webpack-plugin": "^2.30.1",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "style-loader": "^0.18.2",
-    "css-loader": "^0.28.4",
-    "typescript": "^2.4.2",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1"
+    "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^2.1.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.2.2",
+    "webpack": "4.28.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
-    "tesseract.js": "^1.0.10"
+    "jquery": "^3.3.1",
+    "tesseract.js": "^1.0.14"
   }
 }

@@ -33,7 +33,7 @@ $('#solve-button').click(solveBoggle);
 
 function boardSizeChanged(): void {
     boardDiv.empty();
-    board = boggle.createBoard(numRows.val(), numCols.val(), boardDiv);
+    board = boggle.createBoard(numRows.val() as number, numCols.val() as number, boardDiv);
     loadTextToBoard(false);
 };
 
@@ -63,11 +63,11 @@ $.get('data/words-hu.txt').then((data) => {
 });
 
 function loadTextToBoard(solve: boolean): void {
-    var rows = numRows.val(),
-        cols = numCols.val(),
+    var rows = numRows.val() as number,
+        cols = numCols.val() as number,
         count = 0;
 
-    var str = boggleText.val();
+    var str = boggleText.val() as string;
     if (str && str.length == (rows * cols)) {
         for (var r = 0; r < rows; r++) {
             for (var c = 0; c < cols; c++) {

@@ -16,9 +16,6 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html']
     },
-    externals: {
-        'kendo': 'Kendo'
-    },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'js/[name].js'
@@ -52,7 +49,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin('css/style.css'),
-        new webpack.optimize.CommonsChunkPlugin({ name: ['app'] }),
+        //new webpack.optimize.CommonsChunkPlugin({ name: ['app'] }),
         new CleanWebpackPlugin(['./dist/']),
         new CopyWebpackPlugin([{ from: 'src/data', to: 'data' }]),
         new webpack.ProvidePlugin({
